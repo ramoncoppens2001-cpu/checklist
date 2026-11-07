@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Checklist Tool V1.2 · 30-10-2026 -->
+<!-- Checklist Tool V1.3 · 07-11-2026 -->
 <html lang="nl">
 <head>
 <meta charset="utf-8">
@@ -90,7 +90,7 @@ SZ          | secretariaat  |
 =====================================================================
 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Checklist Tool V1.2</title>
+<title>Checklist Tool V1.3</title>
 <style>
 /* =====================================================================
    Checklist Tool — opmaak
@@ -829,6 +829,20 @@ details.uitklap[open] summary::before{transform:rotate(90deg)}
   .lijsttab th:nth-child(4),.lijsttab td:nth-child(4){display:none}
   .toast{bottom:150px}
 }
+/* telefoon: de vier stappen passen naast logo en knoppen */
+@media (max-width:420px){
+  .kopbinnen{gap:4px;padding:0 6px}
+  .stappen button{padding:4px 7px;font-size:11.5px;gap:4px}
+  .stappen .stapvink{display:none}
+  .kop .ikoonknop{width:28px}
+}
+/* dossier kiezen uit een inventarisatie van een opdrachtgever */
+.invlijst{display:flex;flex-direction:column;gap:6px;max-height:min(60vh,520px);overflow-y:auto;margin:0 -4px;padding:3px 4px}
+.invrij{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:center;text-align:left;border:.5px solid var(--lijn);background:var(--wit);border-radius:var(--r);padding:9px 12px;cursor:pointer;transition:background var(--soepel),border-color var(--soepel)}
+.invrij:hover,.invrij:focus-visible{background:var(--geel-t);border-color:var(--lijn-sterk)}
+.invrij b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.invrij .invsoort{font-size:12px;color:var(--zacht);white-space:nowrap}
+.invrij .invtel{grid-column:1/3;font-size:12px;color:var(--flauw)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* ---------- afdrukken ---------- */
@@ -903,8 +917,8 @@ details.uitklap[open] summary::before{transform:rotate(90deg)}
 "use strict";
 const MODUS = "bestand";
 const MERK = "logo";
-const VERSIE = "1.2";
-const VERSIES = [{"versie": "1.2", "datum": "30-10-2026", "punten": ["Team met namen en rollen: 8 taxateurs, 15 uitvoerende taxateurs en het secretariaat.", "Bij Checklist ingevuld door staan alleen de uitvoerende taxateurs.", "Taxateurs staan in de volgorde waarin je ze kiest, met 1e en 2e erbij; zo komen ze ook op de pdf.", "Bij de paraaf voor de dossiercheck stelt de tool de 1e taxateur voor.", "Op de pdf staan namen met initialen; in het ontwerp Formulier krijgen lange namen twee vakken.", "PK en AT zijn uit de lijst gehaald; YE en ST zijn erbij gekomen.", "Versienummer in de tool, onderaan de pdf en in de bestandsnaam."]}, {"versie": "1.1", "datum": "30-10-2026", "punten": ["Open velden om zelf een naam of initialen te typen, bij Taxateurs, Checklist ingevuld door en de parafen.", "Blok TEAM bovenaan het bestand, om namen en rollen in Kladblok aan te passen."]}, {"versie": "1.0", "datum": "30-10-2026", "punten": ["Voortgangsbalk bij het inlezen van een map, met een knop Stoppen.", "Opnieuw beginnen gaat terug naar de keuze enkel object of portefeuille.", "Knop Maak PDF, en zes ontwerpen voor de pdf met een voorbeeld.", "Op de pdf donkere vinkjes, n.v.t. lichtgrijs, geen voetnoot, en bovenaan 'aanwezig'."]}];
+const VERSIE = "1.3";
+const VERSIES = [{"versie": "1.3", "datum": "07-11-2026", "punten": ["Mappen volgens het sjabloon: 04. Berekening, 05. Rapport, 06. Checklist met Akkoord mails; bij een portefeuille de submappen 1 t/m 9 per object.", "Inventarisatie van een opdrachtgever inladen en dan het dossier kiezen; alleen-lezen komt mee.", "Objectmappen met een adres achter het nummer (12539 Radarweg 256) worden herkend.", "Akkoordmails van de taxateurs worden gevonden in Akkoord mails en andere akkoordmappen.", "Bij de berekening gaat het bestand op alleen-lezen voor.", "Back-testing kijkt ook in de map Vorige taxaties.", "Het sjabloon Onderbouwing referenties telt niet meer mee.", "Overzicht: controle van de mapindeling tegen het sjabloon.", "Op een telefoon passen de vier stappen in de kop."]}, {"versie": "1.2", "datum": "30-10-2026", "punten": ["Team met namen en rollen: 8 taxateurs, 15 uitvoerende taxateurs en het secretariaat.", "Bij Checklist ingevuld door staan alleen de uitvoerende taxateurs.", "Taxateurs staan in de volgorde waarin je ze kiest, met 1e en 2e erbij; zo komen ze ook op de pdf.", "Bij de paraaf voor de dossiercheck stelt de tool de 1e taxateur voor.", "Op de pdf staan namen met initialen; in het ontwerp Formulier krijgen lange namen twee vakken.", "PK en AT zijn uit de lijst gehaald; YE en ST zijn erbij gekomen.", "Versienummer in de tool, onderaan de pdf en in de bestandsnaam."]}, {"versie": "1.1", "datum": "30-10-2026", "punten": ["Open velden om zelf een naam of initialen te typen, bij Taxateurs, Checklist ingevuld door en de parafen.", "Blok TEAM bovenaan het bestand, om namen en rollen in Kladblok aan te passen."]}, {"versie": "1.0", "datum": "30-10-2026", "punten": ["Voortgangsbalk bij het inlezen van een map, met een knop Stoppen.", "Opnieuw beginnen gaat terug naar de keuze enkel object of portefeuille.", "Knop Maak PDF, en zes ontwerpen voor de pdf met een voorbeeld.", "Op de pdf donkere vinkjes, n.v.t. lichtgrijs, geen voetnoot, en bovenaan 'aanwezig'."]}];
 const MERKNAAM = "Savills ";
 const LOGO_D = "M72.884,468.165c-25.574,0-42.914-13.098-42.914-37.422v-0.936h14.038v0.621c0,15.904,11.536,25.268,28.998,25.268c9.356,0,27.132-4.057,27.132-19.031c0-28.997-66.737-8.416-66.737-49.893c0-20.896,19.463-30.252,38.797-30.252c22.765,0,38.232,13.094,38.232,34.305v0.936H96.399v-0.936c0-13.723-9.67-21.833-25.267-21.833c-10.915,0-23.701,4.678-23.701,17.158c0,27.132,66.737,8.102,66.737,49.894C114.168,458.183,93.461,468.165,72.884,468.165 M210.424,465.048c-1.244-3.119-2.13-13.723-2.13-18.708v-57.388c0-22.765-13.974-32.432-38.304-32.432c-22.45,0-42.099,9.981-42.099,34.619v0.936h14.038v-0.936c0-15.911,11.851-22.14,26.511-22.14c17.461,0,25.566,6.229,25.566,20.267c0,10.91-5.296,12.161-15.281,13.408l-5.296,0.629c-24.638,2.803-49.904,5.611-49.904,33.673c0,19.337,13.102,31.188,34.937,31.188c19.02,0,31.178-8.416,36.481-19.96c0,0,0,11.229,1.558,16.843H210.424z M194.006,424.193c0,8.108-2.802,15.596-8.105,21.21c-6.547,6.544-15.91,10.289-26.51,10.289c-10.286,0-21.829-5.614-21.829-19.023c0-16.218,17.462-19.956,36.174-22.146l9.979-1.244c2.815-0.307,8.112-1.25,10.292-3.116V424.193z M300.97,359.636h-1.244h-13.767l-28.647,89.323l-28.954-89.323h-16.261l37.424,105.409h15.282L300.97,359.636z M324.835,331.893c0-5.572-4.582-9.828-9.82-9.828c-5.24,0-9.821,4.256-9.821,9.5c0,5.568,4.581,9.82,9.821,9.82c5.238,0,9.82-4.252,9.82-9.82V331.893z M322.497,465.045V359.636h-0.936h-13.724v105.409H322.497z M351.495,465.045V319.717h-0.93h-13.723v145.328H351.495z M380.2,465.045V319.717h-0.937H365.54v145.328H380.2z M431.52,468.165c20.592,0,41.291-9.982,41.291-32.121c0-41.792-67.044-22.762-67.044-49.894c0-12.48,12.779-17.158,24.002-17.158c15.596,0,25.266,8.109,25.266,21.833v0.936h14.031v-0.936c0-21.21-15.468-34.305-38.54-34.305c-19.341,0-38.797,9.356-38.797,30.252c0,41.477,67.044,20.896,67.044,49.893c0,14.975-18.083,19.031-27.432,19.031c-17.162,0-29.012-9.363-29.012-25.268v-0.621h-14.038v0.936C388.291,455.067,405.638,468.165,431.52,468.165";
 /* =====================================================================
@@ -1064,8 +1078,8 @@ const PUNTEN = [
     zoek: {
       map: /correspondentie/, mapW: 4,
       naam: /correspondentie/,
-      niet: /akkoord ?(1e|2e|eerste|tweede)? ?taxateur|akkoordaanvraag|akkoord .*beoordeling/,
-      nietMap: /akkoordmail|akkoord ?taxateur/,
+      niet: /akkoord ?(1e|2e|eerste|tweede)? ?taxateur|akkoordaanvraag|akkoord .*beoordeling|approval .*appraiser/,
+      nietMap: /akkoord/,
       ext: [...MAIL, "docx"],
     },
   },
@@ -1148,11 +1162,12 @@ const PUNTEN = [
     id: "referenties", sectie: "object", scope: "object",
     titel: "Referenties (navolgbaar geselecteerd en vindbaar)",
     kort: "Referenties",
-    hint: "Zie document \"Onderbouwing referenties\" in de dossiermap (8. Diversen).",
+    hint: "Referenties horen in 3.8 Marktverhaal & Referenties (portefeuille: 8. in de objectmap).",
     zoek: {
       map: /referent|markt|diversen/, mapW: 2,
       naam: /referent|onderbouwing|comparable|transactie/,
       zwak: /marktverhaal|\bmarkt\b/,
+      niet: /sjabloon|template/,
       ext: [...DOC, ...EXCEL],
     },
   },
@@ -1174,8 +1189,10 @@ const PUNTEN = [
     titel: "Berekening (Excel)",
     kort: "Berekening",
     hint: "Bij een Flux-rapport: zie de bijlagen van het Flux-rapport.",
+    voorkeurAlleenLezen: true,
     zoek: {
       map: /berekening|rekenmodel|calculatie/, mapW: 2,
+      mapSterk: /definitief/,
       naam: /^\d{5} \d{2}\b|berekening|rekenmodel|taxatiemodel|\bdcf\b|flux/,
       zwak: /waardeoverzicht/,
       niet: /preview|draft|concept|\bopm\b|inspect|\besg\b|huur|lijst|scan/,
@@ -1187,12 +1204,12 @@ const PUNTEN = [
     titel: "Onderbouwing markthuur en rendement (tabblad)",
     kort: "Onderbouwing markthuur",
     nooitAuto: true,
-    hint: "Zie document \"Onderbouwing referenties\" in de dossiermap (8. Diversen), en met wie van de afdeling Investments besproken in geval van GZV.",
+    hint: "Het tabblad met de onderbouwing in de berekening. Bij GZV: met wie van de afdeling Investments besproken.",
     tabbladen: /onderbouw|markthuur|rendement|referent|\bbar\b|\bnar\b|yield|\berv\b|comparab/i,
     zoek: {
       map: /berekening|rekenmodel|referent|markt|diversen/, mapW: 1,
       naam: /^\d{5} \d{2}\b|onderbouwing|markthuur|rendement|referent/,
-      niet: /preview|draft|concept|\bopm\b|marktverhaal|inspect|\besg\b|huur|lijst|scan/,
+      niet: /preview|draft|concept|\bopm\b|marktverhaal|inspect|\besg\b|huur|lijst|scan|sjabloon|template/,
       ext: [...EXCEL, "docx"],
     },
   },
@@ -1249,8 +1266,9 @@ const PUNTEN = [
     nvtAls: (d) => ["Volledige waardering", "Second opinion"].includes(d.typeTaxatie) ? `${d.typeTaxatie}: geen hertaxatie of update` : null,
     tabbladen: /back|vorige|vergelijk|historie/i,
     zoek: {
+      map: /vorige taxatie|back ?test/, mapW: 3,
       naam: /back ?test|backtest|vorige taxatie|vorig rapport|vergelijking vorige|hertaxatie/,
-      ext: [...DOC, ...EXCEL],
+      ext: [...DOC, ...EXCEL, "lnk"],
     },
   },
   {
@@ -1271,12 +1289,13 @@ const PUNTEN = [
     id: "akkoordtax", sectie: "checklist", scope: "dossier",
     titel: "E-mail akkoord berekening/rapportage taxateurs",
     kort: "Akkoord taxateurs",
-    hint: "E-mail akkoord taxateurs opgeslagen onder 2. Correspondentie.",
+    hint: "De akkoordmails van de taxateurs horen in 06. Checklist\\Akkoord mails.",
     zoek: {
-      map: /akkoord ?taxateur|akkoordmail/, mapW: 4,
-      naam: /akkoord ?(1e|2e|eerste|tweede)? ?taxateur|akkoord .*(beoordeling|rapport|berekening)|akkoordaanvraag/,
-      zwak: /akkoord/,
-      niet: /\bcea\b|\bcoi\b|high ?risk/,
+      map: /akkoord/, mapW: 3,
+      mapSterk: /checklist/,
+      naam: /akkoord ?(1e|2e|eerste|tweede)? ?taxateur|akkoord .*(beoordeling|rapport|berekening)|akkoordaanvraag|\bakkoord\b|approval/,
+      niet: /\bcea\b|\bcoi\b|\bakk\b|high ?risk/,
+      nietMap: /opdracht|secretariaat/,
       ext: MAIL,
     },
   },
@@ -1299,8 +1318,10 @@ const PUNTEN = [
     titel: "Berekening 'alleen lezen'",
     kort: "Berekening alleen-lezen",
     hint: "De definitieve berekening staat op alleen-lezen. Bij een gekozen map kan de browser dat niet zien: controleer het in Verkenner (rechtsklik › Eigenschappen).",
+    voorkeurAlleenLezen: true,
     zoek: {
       map: /berekening|rekenmodel|calculatie/, mapW: 2, moetMap: true,
+      mapSterk: /definitief/,
       naam: /^\d{5} \d{2}\b|berekening|rekenmodel|taxatiemodel/,
       niet: /preview|draft|concept|\bopm\b|inspect|\besg\b|huur|lijst|scan|waardeoverzicht/,
       ext: EXCEL,
@@ -1826,37 +1847,38 @@ const DEMO = {
       ["01. Opdracht\\FW_ TAX-300112 Kade Vastgoed - aangepaste deadline.msg", 166, "2026-10-16 08:51"],
       ["01. Opdracht\\RE_ Opdracht waardering Kade Vastgoed - factuurgegevens.msg", 443, "2026-10-14 12:30"],
       ["01. Opdracht\\INV03004120 - 2026-10-28 - Voorbeeldbank N.V. - Kade Vastgoed B.V..pdf", 51, "2026-10-28 09:04"],
-      ["01. Opdracht\\Akkoord taxateurs\\Akkoord MO & KV.pdf", 258, "2026-10-27 13:14"],
+      ["06. Checklist\\Akkoord mails\\Akkoord MO & KV.pdf", 258, "2026-10-27 13:14"],
       ["02. Correspondentie\\Correspondentie opdrachtgever.pdf", 2140, "2026-10-27 10:12"],
       ["02. Correspondentie\\RE_ Aanlevering huurcontracten Havenkade 18.msg", 912, "2026-10-15 15:20"],
-      ["03. Object Informatie\\3.1 Inspectie Formulier\\inspection_form.xlsx", 186, "2026-10-19 16:38"],
-      ...demoFotos("03. Object Informatie\\3.2 Foto's", 2041, 2064),
-      ["03. Object Informatie\\3.2 Foto's\\IMG_2050.JPG~RF1a2b3c.TMP", 3300, "2026-10-19 17:27"],
-      ["03. Object Informatie\\3.3 Kadaster\\Eigendomsinformatie - Zwolle K 4812.pdf", 43, "2026-10-14 15:00"],
-      ["03. Object Informatie\\3.3 Kadaster\\Kadastrale kaart - Zwolle K 4812.pdf", 257, "2026-10-14 15:00"],
-      ["03. Object Informatie\\3.3 Kadaster\\Leveringsakte - Onroerende Zaken Hyp4 81234 56.pdf", 234, "2026-10-14 15:02"],
-      ["03. Object Informatie\\3.4 Bestemming\\Planregels.pdf", 82, "2026-10-14 09:46"],
-      ["03. Object Informatie\\3.4 Bestemming\\Plankaart.pdf", 379, "2026-10-14 09:44"],
-      ["03. Object Informatie\\3.5 Plattegronden - Meetstaten\\NEN2580 meetrapport Havenkade 18.pdf", 123, "2026-10-15 16:32"],
-      ["03. Object Informatie\\3.5 Plattegronden - Meetstaten\\Plattegrond begane grond en 1e verdieping.pdf", 228, "2026-10-15 16:32"],
-      ["03. Object Informatie\\3.6 Huurgegevens\\Huurlijst Havenkade 18.pdf", 154, "2026-10-15 14:59"],
-      ["03. Object Informatie\\3.6 Huurgegevens\\HK18_Unit1_HO_BakkerijDeMolen_010524.pdf", 856, "2026-10-15 15:21"],
-      ["03. Object Informatie\\3.6 Huurgegevens\\HK18_Unit2_HO_FysioAanDeKade_150323.pdf", 889, "2026-10-15 15:21"],
-      ["03. Object Informatie\\3.6 Huurgegevens\\HK18_Unit2_AL_FysioAanDeKade_010125.pdf", 875, "2026-10-15 15:21"],
-      ["03. Object Informatie\\3.6 Huurgegevens\\Kade Vastgoed B.V. - Company.info.pdf", 435, "2026-10-19 13:03"],
-      ["03. Object Informatie\\3.7 Eigenaarslasten en Onderhoud\\R_MJOP_Havenkade18_2026-2035.pdf", 1320, "2026-10-15 18:19"],
-      ["03. Object Informatie\\3.7 Eigenaarslasten en Onderhoud\\R_Scope10_Inspectie_HK18_030526.pdf", 1290, "2026-10-15 12:11"],
-      ["03. Object Informatie\\3.8 ESG en Milieu\\R_Energielabel_B_120322.pdf", 1100, "2026-10-15 12:11"],
-      ["03. Object Informatie\\3.8 ESG en Milieu\\esg_scan.pdf", 227, "2026-10-21 14:13"],
-      ["03. Object Informatie\\3.8 ESG en Milieu\\esg_scan.xlsx", 162, "2026-10-21 09:54"],
-      ["04. Markt\\Marktverhaal lokaal Zwolle.pdf", 794, "2026-10-16 09:49"],
-      ["04. Markt\\De Nederlandse Kantorenmarkt - Q3 2026.pdf", 335, "2026-10-16 09:50"],
-      ["04. Markt\\Onderbouwing referenties Havenkade 18.docx", 48, "2026-10-21 11:05"],
-      ["05. Berekening\\4.1 Werkmap\\10482-01.xlsm", 4400, "2026-10-22 16:45", true],
-      ["05. Berekening\\4.1 Werkmap\\10482-01 PREVIEW.pdf", 355, "2026-10-22 16:46"],
-      ["06. Rapport\\5.1 Werkmap\\10482-01 Havenkade 18 in Zwolle PREVIEW.pdf", 6400, "2026-10-23 15:02"],
-      ["06. Rapport\\5.1 Werkmap\\10482-01 Havenkade 18 in Zwolle PREVIEW met opm. KV.pdf", 6200, "2026-10-23 09:21"],
-      ["06. Rapport\\5.3 Definitief\\10482-01_Havenkade_18_in_Zwolle_DEFINITIEF_dd_27-10-2026.pdf", 6400, "2026-10-27 09:35"],
+      ["03. Object Informatie\\3.1 Inspectie Formulier & Foto's\\inspection_form.xlsx", 186, "2026-10-19 16:38"],
+      ...demoFotos("03. Object Informatie\\3.1 Inspectie Formulier & Foto's", 2041, 2064),
+      ["03. Object Informatie\\3.1 Inspectie Formulier & Foto's\\IMG_2050.JPG~RF1a2b3c.TMP", 3300, "2026-10-19 17:27"],
+      ["03. Object Informatie\\3.2 Kadaster\\Eigendomsinformatie - Zwolle K 4812.pdf", 43, "2026-10-14 15:00"],
+      ["03. Object Informatie\\3.2 Kadaster\\Kadastrale kaart - Zwolle K 4812.pdf", 257, "2026-10-14 15:00"],
+      ["03. Object Informatie\\3.2 Kadaster\\Leveringsakte - Onroerende Zaken Hyp4 81234 56.pdf", 234, "2026-10-14 15:02"],
+      ["03. Object Informatie\\3.3 Bestemming\\Planregels.pdf", 82, "2026-10-14 09:46"],
+      ["03. Object Informatie\\3.3 Bestemming\\Plankaart.pdf", 379, "2026-10-14 09:44"],
+      ["03. Object Informatie\\3.4 Plattegronden - Meetstaten\\NEN2580 meetrapport Havenkade 18.pdf", 123, "2026-10-15 16:32"],
+      ["03. Object Informatie\\3.4 Plattegronden - Meetstaten\\Plattegrond begane grond en 1e verdieping.pdf", 228, "2026-10-15 16:32"],
+      ["03. Object Informatie\\3.5 Huurgegevens\\Huurlijst Havenkade 18.pdf", 154, "2026-10-15 14:59"],
+      ["03. Object Informatie\\3.5 Huurgegevens\\HK18_Unit1_HO_BakkerijDeMolen_010524.pdf", 856, "2026-10-15 15:21"],
+      ["03. Object Informatie\\3.5 Huurgegevens\\HK18_Unit2_HO_FysioAanDeKade_150323.pdf", 889, "2026-10-15 15:21"],
+      ["03. Object Informatie\\3.5 Huurgegevens\\HK18_Unit2_AL_FysioAanDeKade_010125.pdf", 875, "2026-10-15 15:21"],
+      ["03. Object Informatie\\3.5 Huurgegevens\\Kade Vastgoed B.V. - Company.info.pdf", 435, "2026-10-19 13:03"],
+      ["03. Object Informatie\\3.6 Eigenaarslasten en Onderhoud\\R_MJOP_Havenkade18_2026-2035.pdf", 1320, "2026-10-15 18:19"],
+      ["03. Object Informatie\\3.6 Eigenaarslasten en Onderhoud\\R_Scope10_Inspectie_HK18_030526.pdf", 1290, "2026-10-15 12:11"],
+      ["03. Object Informatie\\3.7 ESG en Milieu\\R_Energielabel_B_120322.pdf", 1100, "2026-10-15 12:11"],
+      ["03. Object Informatie\\3.7 ESG en Milieu\\esg_scan.pdf", 227, "2026-10-21 14:13"],
+      ["03. Object Informatie\\3.7 ESG en Milieu\\esg_scan.xlsx", 162, "2026-10-21 09:54"],
+      ["03. Object Informatie\\3.8 Marktverhaal & Referenties\\Marktverhaal lokaal Zwolle.pdf", 794, "2026-10-16 09:49"],
+      ["03. Object Informatie\\3.8 Marktverhaal & Referenties\\De Nederlandse Kantorenmarkt - Q3 2026.pdf", 335, "2026-10-16 09:50"],
+      ["03. Object Informatie\\3.8 Marktverhaal & Referenties\\Onderbouwing referenties Havenkade 18.docx", 48, "2026-10-21 11:05"],
+      ["04. Berekening\\4.1 Werkmap\\10482-01.xlsm", 4400, "2026-10-22 16:45", true],
+      ["04. Berekening\\4.1 Werkmap\\10482-01 PREVIEW.pdf", 355, "2026-10-22 16:46"],
+      ["04. Berekening\\4.3 Definitief\\10482-01.pdf", 362, "2026-10-27 09:30"],
+      ["05. Rapport\\5.1 Werkmap\\10482-01 Havenkade 18 in Zwolle PREVIEW.pdf", 6400, "2026-10-23 15:02"],
+      ["05. Rapport\\5.1 Werkmap\\10482-01 Havenkade 18 in Zwolle PREVIEW met opm. KV.pdf", 6200, "2026-10-23 09:21"],
+      ["05. Rapport\\5.3 Definitief\\10482-01_Havenkade_18_in_Zwolle_DEFINITIEF_dd_27-10-2026.pdf", 6400, "2026-10-27 09:35"],
     ],
     dossier: { typeTaxatie: "Volledige waardering", highRisk: "nee", terugkerend: "One-off", taxateurs: ["MO", "KV"], ingevuldDoor: "KV", flowId: "FL-26-04821" },
   },
@@ -1880,11 +1902,11 @@ const DEMO = {
       ["02. Correspondentie\\RE_ Stadshaven Wonen - aanlevering documenten.msg", 1180, "2026-10-09 16:12"],
       ["02. Correspondentie\\FW_ Opdrachtbrief taxatie.msg", 538, "2026-10-02 11:43"],
       ["02. Correspondentie\\Inspectie Molenstraat Deventer.msg", 143, "2026-10-14 08:43"],
-      ["02. Correspondentie\\Akkoordmails\\Akkoord 1e taxateur beoordeling Molenstraat 4-12 Deventer.msg", 114, "2026-10-24 14:42"],
-      ["02. Correspondentie\\Akkoordmails\\Akkoord 2e taxateur beoordeling Molenstraat 4-12 Deventer.msg", 128, "2026-10-24 16:02"],
-      ["02. Correspondentie\\Akkoordmails\\Akkoord 1e taxateur beoordeling Parklaan 33 Apeldoorn.msg", 113, "2026-10-24 14:44"],
-      ["02. Correspondentie\\Akkoordmails\\Akkoord 2e taxateur beoordeling Parklaan 33 Apeldoorn.msg", 127, "2026-10-24 16:05"],
-      ["02. Correspondentie\\Akkoordmails\\Akkoord 1e taxateur beoordeling Rivierweg 7 Zutphen.msg", 113, "2026-10-25 09:12"],
+      ["06. Checklist\\Akkoord mails\\Akkoord 1e taxateur beoordeling Molenstraat 4-12 Deventer.msg", 114, "2026-10-24 14:42"],
+      ["06. Checklist\\Akkoord mails\\Akkoord 2e taxateur beoordeling Molenstraat 4-12 Deventer.msg", 128, "2026-10-24 16:02"],
+      ["06. Checklist\\Akkoord mails\\Akkoord 1e taxateur beoordeling Parklaan 33 Apeldoorn.msg", 113, "2026-10-24 14:44"],
+      ["06. Checklist\\Akkoord mails\\Akkoord 2e taxateur beoordeling Parklaan 33 Apeldoorn.msg", 127, "2026-10-24 16:05"],
+      ["06. Checklist\\Akkoord mails\\Akkoord 1e taxateur beoordeling Rivierweg 7 Zutphen.msg", 113, "2026-10-25 09:12"],
       ["03. Algemene Informatie\\20261001 Huurlijst Stadshaven Wonen.xlsx", 46, "2026-10-01 11:05"],
       ["03. Algemene Informatie\\Taxatie dossier aangeleverd door opdrachtgever\\03 Zutphen\\01 Woningen\\Rivierweg 7 (bezichtiging samen met de beheerder)\\01 Huurovereenkomsten en allonges\\Huurovereenkomst Rivierweg 7 inclusief allonge parkeerplaatsen, getekend door beide partijen.pdf", 2500, "2026-10-01 11:40"],
       ["04. Berekeningen\\4.1 Werkmap\\10511-01.xlsm", 4210, "2026-10-22 16:45", true],
@@ -2045,7 +2067,12 @@ function leesInventarisHtml(tekst) {
       break;
     }
   }
-  if (!tabel) throw new Error("Dit lijkt geen inventarisatie: de tabel ‘Alle bestanden’ ontbreekt.");
+  const sub0 = (doc.querySelector(".sub")?.textContent || "").replace(/^gemaakt op\s*/i, "").trim();
+  if (!tabel) {
+    const lijst = leesInventarisBoom(doc);
+    if (!lijst) throw new Error("Dit lijkt geen inventarisatie: de tabel ‘Alle bestanden’ en de mapstructuur ontbreken.");
+    return { root, gemaakt: sub0, lijst };
+  }
   const kop = [...tabel.querySelectorAll("thead th")].map((th) => th.textContent.trim().toLowerCase());
   const ix = (n) => kop.findIndex((k) => k.startsWith(n));
   const iMap = ix("map"), iNaam = ix("bestand"), iGr = ix("grootte"), iGew = ix("gewijzigd"), iRo = ix("alleen");
@@ -2064,6 +2091,61 @@ function leesInventarisHtml(tekst) {
   }
   const sub = (doc.querySelector(".sub")?.textContent || "").replace(/^gemaakt op\s*/i, "").trim();
   return { root, gemaakt: sub, lijst };
+}
+
+/* De inventarisatie zoals het script hem nu maakt: alleen de "Mapstructuur", een boom
+   van <details class="boom"> met per bestand een <li>. Een slotje (stip s-slot) is
+   alleen-lezen. Datums staan er per bestand niet in. */
+function leesInventarisBoom(doc) {
+  const top = doc.querySelector(".boomvak > details.boom");
+  if (!top) return null;
+  const lijst = [];
+  const loop = (det, pad) => {
+    const kind = [...det.children].find((c) => c.classList.contains("kinderen"));
+    if (!kind) return;
+    for (const el of kind.children) {
+      if (el.matches("details.boom")) {
+        const naam = el.querySelector(":scope > summary .mapnaam")?.textContent.trim() || "";
+        loop(el, pad ? `${pad}\\${naam}` : naam);
+      } else if (el.matches("ul.bestanden")) {
+        for (const li of el.querySelectorAll(":scope > li")) {
+          const spans = [...li.querySelectorAll(":scope > span")];
+          const naamEl = spans.find((s) => !s.classList.contains("stip") && !s.classList.contains("grootte"));
+          const naam = naamEl?.textContent.trim();
+          if (!naam) continue;
+          lijst.push(maakBestand({
+            pad: pad ? `${pad}\\${naam}` : naam,
+            grootte: parseGrootte(li.querySelector(".grootte")?.textContent),
+            ro: !!li.querySelector(".stip.s-slot"),
+          }));
+        }
+      }
+    }
+  };
+  loop(top, "");
+  return lijst.length ? lijst : null;
+}
+/* Is dit de map van een opdrachtgever (T:\Archief\2026\Bank) in plaats van één dossier?
+   Dan staan de dossiers als submappen in de bovenste laag. */
+function dossiersInInventaris(root, lijst) {
+  const delen = String(root || "").split(/[\\/]/).filter(Boolean);
+  const j = delen.findIndex((d) => /^(19|20)\d{2}$/.test(d));
+  const tops = [...new Set(lijst.map((b) => b.mapDelen[0]).filter(Boolean))];
+  const lijktDossier = tops.some((t) => /^(opdracht|algemeen secretariaat|correspondentie)/.test(normTekst(stripNr(t))));
+  const opdrachtgever = j >= 0 ? delen.length === j + 2 : !lijktDossier && tops.filter((t) => /^\d{5}/.test(t)).length >= 2;
+  if (!opdrachtgever || lijktDossier) return null;
+  return tops.map((t) => {
+    const sub = lijst.filter((b) => b.mapDelen[0] === t);
+    const subTops = [...new Set(sub.map((b) => b.mapDelen[1]).filter(Boolean))];
+    const port = subTops.filter((x) => objMapInfo(x)).length >= 2;
+    return { naam: t, aantal: sub.length, soort: port ? "portefeuille" : "enkel" };
+  }).filter((d) => d.aantal).sort((a, b) => a.naam.localeCompare(b.naam, "nl", { numeric: true }));
+}
+/* Eén dossier uit een inventarisatie halen: paden worden relatief aan die dossiermap. */
+function dossierUitInventaris(r, naam) {
+  const lijst = r.lijst.filter((b) => b.mapDelen[0] === naam)
+    .map((b) => maakBestand({ pad: b.id.slice(naam.length + 1), grootte: b.grootte, gewijzigd: b.gewijzigd, ro: b.ro }));
+  return { root: `${r.root.replace(/[\\/]+$/, "")}\\${naam}`, lijst };
 }
 
 /* ---------------- inlezen: plaklijst met paden ---------------- */
@@ -2199,14 +2281,25 @@ function vindObjecten() {
     return [{ nr, map: null, ...label(nr) }];
   }
   const tops = [...new Set(S.bestanden.map((b) => b.mapDelen[0]).filter(Boolean))];
-  let lijst = tops.filter((t) => /^\d{5}(?:[-_ ]\d{2})?$/.test(t.trim())).map((t) => ({ nr: t.trim().slice(0, 5), map: t }));
+  let lijst = tops.map((t) => ({ t, m: objMapInfo(t) })).filter((x) => x.m).map((x) => ({ nr: x.m.nr, map: x.t, mapAdres: x.m.adres }));
   if (!lijst.length) {
     const nrs = new Set();
     S.bestanden.forEach((b) => { if (/rapport|berekening/.test(b.mapN)) for (const m of b.naam.matchAll(/\b(\d{5})-\d{2}\b/g)) nrs.add(m[1]); });
     lijst = [...nrs].map((nr) => ({ nr, map: null }));
   }
   if (!lijst.length) { const nr = dossierNummer(); return [{ nr, map: null, geen: true, ...label(nr) }]; }
-  return lijst.sort((a, b) => a.nr.localeCompare(b.nr)).map((o) => ({ ...o, ...label(o.nr) }));
+  return lijst.sort((a, b) => a.nr.localeCompare(b.nr)).map((o) => {
+    const l = label(o.nr);
+    // geen adres uit een rapport: dan het adres uit de mapnaam (12539 Radarweg 256)
+    return { ...o, ...l, adres: l.adres || o.mapAdres || "" };
+  });
+}
+/* Een objectmap in een portefeuille: begint met een dossiernummer van 5 cijfers,
+   eventueel met versie en een adres erachter: 12539, 12539-01, 12539 Radarweg 256,
+   09768 - Albert Cuypstraat 210-H. */
+function objMapInfo(naam) {
+  const m = /^(\d{5})(?:[-_]\d{2})?(?:\s*$|[\s\-_–]+(.*)$)/.exec(String(naam || "").trim());
+  return m ? { nr: m[1], adres: (m[2] || "").replace(/^[\s\-–]+/, "").trim() } : null;
 }
 function dossierNummer() {
   const n = String(S.bron?.naam || "").trim();
@@ -2218,7 +2311,7 @@ function dossierNummer() {
 }
 function herkenType() {
   const tops = [...new Set(S.bestanden.map((b) => b.mapDelen[0]).filter(Boolean))];
-  S.objMappen = tops.filter((t) => /^\d{5}(?:[-_ ]\d{2})?$/.test(t.trim())).sort();
+  S.objMappen = tops.filter((t) => objMapInfo(t)).sort();
   return S.objMappen.length >= 2 ? "portefeuille" : "enkel";
 }
 function objectVan(b) {
@@ -2280,6 +2373,16 @@ function berekenKandidaten(p) {
   }
   return uit;
 }
+/* Wat klaarstaat: alles vanaf KIES. Bij de berekening gaat een bestand op alleen-lezen
+   voor, want dat is de definitieve versie; dan staan werkversies niet ook klaar. */
+function voorgekozen(p, lijst) {
+  const klaar = lijst.filter((k) => k.score >= KIES && !k.gedeeld);
+  if (p.voorkeurAlleenLezen) {
+    const ro = lijst.filter((k) => k.score >= TOON && !k.gedeeld && B(k.id)?.ro === true);
+    if (ro.length) return ro.map((k) => k.id);
+  }
+  return klaar.map((k) => k.id);
+}
 function nieuwPunt() { return { status: null, toelichting: "", gekozen: {}, objNvt: {}, objRes: {}, paraaf: { initialen: "", datum: "" }, tijd: null, auto: false, autoToel: false }; }
 
 function analyseer({ behoud = false } = {}) {
@@ -2316,7 +2419,7 @@ function analyseer({ behoud = false } = {}) {
     const oud = behoud ? S.punten[p.id] : null;
     const st = oud || nieuwPunt();
     for (const o of objNrs(p)) {
-      if (!oud || !st.gekozen[o]) st.gekozen[o] = (S.kand[p.id][o] || []).filter((k) => k.score >= KIES && !k.gedeeld).map((k) => k.id);
+      if (!oud || !st.gekozen[o]) st.gekozen[o] = voorgekozen(p, S.kand[p.id][o] || []);
     }
     S.punten[p.id] = st;
   }
@@ -2465,10 +2568,79 @@ function aandachtspunten() {
   const uit = [];
   const tmp = S.bestanden.filter((b) => b.tijdelijk && !b.systeem);
   if (tmp.length) uit.push({ soort: "let", tekst: `${meervoud(tmp.length, "tijdelijk bestand", "tijdelijke bestanden")} in het dossier`, detail: tmp.slice(0, 3).map((b) => b.naam).join(", ") });
-  const sj = S.bestanden.filter((b) => b.sjabloon);
+  // het sjabloon "Onderbouwing referenties" staat standaard in elke map en telt niet mee
+  const sj = S.bestanden.filter((b) => b.sjabloon && !/onderbouwing referenties/i.test(b.naam));
   if (sj.length) uit.push({ soort: "let", tekst: `${meervoud(sj.length, "bestand heet", "bestanden heten")} ‘sjabloon’: controleer of ze zijn ingevuld`, detail: sj.slice(0, 3).map((b) => b.id).join(" · ") });
   const lang = padLengtes().filter((x) => x.lengte >= INSTELLINGEN.maxPad);
   if (lang.length) uit.push({ soort: "mis", tekst: `${meervoud(lang.length, "pad is", "paden zijn")} te lang (${INSTELLINGEN.maxPad}+ tekens)`, detail: lang[0].b.naam });
+  return uit.concat(mapCheck());
+}
+
+/* ---------------- map-check tegen het sjabloon ----------------
+   Zo hoort een dossiermap er nu uit te zien (de lege sjabloonmappen).
+   Een map telt als aanwezig als de naam zonder nummer klopt; "Berekeningen"
+   en "Berekening" zijn hetzelfde. "leeg" = hier hoort na afloop iets in. */
+const SJABLOON = {
+  enkel: [
+    "01. Opdracht", "02. Correspondentie",
+    "03. Object Informatie", "03. Object Informatie\\3.1 Inspectie Formulier & Foto's", "03. Object Informatie\\3.2 Kadaster",
+    "03. Object Informatie\\3.3 Bestemming", "03. Object Informatie\\3.4 Plattegronden - Meetstaten", "03. Object Informatie\\3.5 Huurgegevens",
+    "03. Object Informatie\\3.6 Eigenaarslasten en Onderhoud", "03. Object Informatie\\3.7 ESG en Milieu",
+    "03. Object Informatie\\3.8 Marktverhaal & Referenties", "03. Object Informatie\\3.9 Diversen",
+    "04. Berekening", "04. Berekening\\4.1 Werkmap", "04. Berekening\\4.2 Concept", "04. Berekening\\4.3 Definitief",
+    "05. Rapport", "05. Rapport\\5.1 Werkmap", "05. Rapport\\5.2 Concept", "05. Rapport\\5.3 Definitief",
+    "06. Checklist", "06. Checklist\\Akkoord mails",
+  ],
+  portefeuille: [
+    "01. Algemeen Secretariaat", "02. Correspondentie", "03. Algemene Informatie",
+    "04. Berekeningen", "04. Berekeningen\\4.1 Werkmap", "04. Berekeningen\\4.2 Concept", "04. Berekeningen\\4.3 Definitief",
+    "05. Rapporten", "05. Rapporten\\5.1 Werkmap", "05. Rapporten\\5.2 Concept", "05. Rapporten\\5.3 Definitief",
+    "06. Checklist", "06. Checklist\\Akkoord mails",
+  ],
+  object: [
+    "1. Inspectie Formulier & Foto's", "2. Kadaster", "3. Bestemming", "4. Plattegronden - Meetstaten", "5. Huurgegevens",
+    "6. Eigenaarslasten en Onderhoud", "7. ESG en Milieu", "8. Marktverhaal & Referenties", "9. Diversen",
+  ],
+  leeg: ["4.3 Definitief", "5.3 Definitief", "Akkoord mails"],
+};
+const mapSleutel = (seg) => normTekst(stripNr(seg)).replace(/(berekening|rapport)en\b/, "$1").replace(/\s+/g, "");
+/* Alle mappen die in het dossier voorkomen (een map zonder bestanden ziet de tool niet). */
+function mappenIn(bestanden) {
+  const uit = new Set();
+  for (const b of bestanden) for (let i = 1; i <= b.mapDelen.length; i++) uit.add(b.mapDelen.slice(0, i).map(mapSleutel).join("\\"));
+  return uit;
+}
+const sjSleutel = (pad) => pad.split("\\").map(mapSleutel).join("\\");
+function mapCheck() {
+  if (!S.bron) return [];
+  const uit = [];
+  const port = S.type === "portefeuille";
+  const best = S.bestanden.filter((b) => !b.systeem);
+  const objMappen = new Set(S.objectenAlle.map((o) => o.map).filter(Boolean));
+  const algemeen = best.filter((b) => !objMappen.has(b.mapDelen[0]));
+  const er = mappenIn(algemeen);
+  const lijst = SJABLOON[port ? "portefeuille" : "enkel"];
+  const hoofd = lijst.filter((p) => !p.includes("\\"));
+  const hoofdWeg = hoofd.filter((p) => !er.has(sjSleutel(p)));
+  // weinig herkenbare mappen: een oudere of andere indeling, dan niet alles opsommen
+  if (hoofdWeg.length > hoofd.length / 2) {
+    uit.push({ soort: "let", tekst: "De mapindeling wijkt af van het sjabloon", detail: `Niet gevonden: ${hoofdWeg.join(", ")}. Misschien een oudere indeling.` });
+  } else {
+    const weg = lijst.filter((p) => !er.has(sjSleutel(p)));
+    const leeg = weg.filter((p) => SJABLOON.leeg.some((l) => p.endsWith(l)));
+    const rest = weg.filter((p) => !leeg.includes(p));
+    if (leeg.length) uit.push({ soort: "mis", tekst: `Geen bestanden in ${leeg.join(", ")}`, detail: "Hier hoort na afloop iets in te staan." });
+    if (rest.length) uit.push({ soort: "let", tekst: `${meervoud(rest.length, "map uit het sjabloon ontbreekt of is leeg", "mappen uit het sjabloon ontbreken of zijn leeg")}`, detail: rest.join(", ") });
+  }
+  if (port) {
+    const objZonder = S.objecten.filter((o) => o.map).map((o) => {
+      const erO = mappenIn(best.filter((b) => b.mapDelen[0] === o.map).map((b) => ({ mapDelen: b.mapDelen.slice(1) })));
+      return { o, weg: SJABLOON.object.filter((p) => !erO.has(sjSleutel(p))) };
+    }).filter((x) => x.weg.length >= SJABLOON.object.length / 2);
+    if (objZonder.length) uit.push({ soort: "let", tekst: `${meervoud(objZonder.length, "objectmap heeft", "objectmappen hebben")} weinig van de submappen 1 t/m 9`, detail: objZonder.slice(0, 4).map((x) => x.o.map).join(" · ") });
+  }
+  const los = best.filter((b) => !b.mapDelen.length && !b.tijdelijk && !/\.lnk$|\.url$/i.test(b.naam));
+  if (los.length) uit.push({ soort: "let", tekst: `${meervoud(los.length, "bestand staat", "bestanden staan")} los in de hoofdmap`, detail: los.slice(0, 3).map((b) => b.naam).join(" · ") });
   return uit;
 }
 
@@ -3473,7 +3645,7 @@ function tekenA4() {
 }
 function checklistMap() {
   const m = [...new Set(S.bestanden.map((b) => b.mapDelen[0]).filter(Boolean))].find((d) => /checklist/i.test(d));
-  return m || (S.type === "portefeuille" ? "06. Checklist" : "07. Checklist");
+  return m || "06. Checklist";
 }
 function pdfNaam() {
   const nr = S.type === "portefeuille" ? (S.dossier.projectnaam || S.bron?.naam || "portefeuille") : S.dossier.dossiernummer || S.objecten[0]?.nr || "dossier";
@@ -3576,11 +3748,33 @@ function laadFileList(files) {
 async function laadInventaris(file) {
   try {
     const r = leesInventarisHtml(await file.text());
+    const dossiers = dossiersInInventaris(r.root, r.lijst);
+    if (dossiers && dossiers.length) return kiesUitInventaris(r, dossiers);
     const naam = r.root.split(/[\\/]/).filter(Boolean).pop() || file.name.replace(/\.html?$/i, "");
     laadDossier({ soort: "inventaris", naam, root: r.root, gemaakt: r.gemaakt }, r.lijst);
     toonScherm("dossier");
     melding(`Inventarisatie geladen: ${meervoud(r.lijst.length, "bestand", "bestanden")}`, "goed");
   } catch (e) { melding(esc(e.message), "mis"); }
+}
+/* De inventarisatie gaat over een hele opdrachtgever: kies eerst het dossier. */
+function kiesUitInventaris(r, dossiers) {
+  UI.inventaris = r;
+  const og = r.root.split(/[\\/]/).filter(Boolean).pop() || "deze opdrachtgever";
+  openVenster({
+    titel: "Welk dossier?",
+    tekst: `De inventarisatie gaat over ${esc(og)}, met ${meervoud(dossiers.length, "dossier", "dossiers")}. Kies het dossier dat je wilt controleren.`,
+    lijf: `<div class="invlijst">${dossiers.map((d) => `<button type="button" class="invrij" data-invdossier="${esc(d.naam)}"><b>${esc(d.naam)}</b><span class="invsoort">${soortNaam(d.soort)}</span><span class="invtel">${meervoud(d.aantal, "bestand", "bestanden")}</span></button>`).join("")}</div>`,
+    knoppen: [{ tekst: "Annuleren" }],
+  });
+}
+function laadUitInventaris(naam) {
+  const r = UI.inventaris;
+  if (!r) return;
+  const d = dossierUitInventaris(r, naam);
+  sluitVenster();
+  laadDossier({ soort: "inventaris", naam, root: d.root, gemaakt: r.gemaakt }, d.lijst);
+  toonScherm("dossier");
+  melding(`${esc(naam)} geladen uit de inventarisatie: ${meervoud(d.lijst.length, "bestand", "bestanden")}`, "goed");
 }
 function kiesMap() {
   const inFrame = (() => { try { return window.self !== window.top; } catch { return true; } })();
@@ -3669,6 +3863,7 @@ function koppel() {
     const t = e.target;
     const stap = t.closest("[data-stap]"); if (stap && !stap.disabled) { toonScherm(stap.dataset.stap); return; }
     const demo = t.closest("[data-demo]"); if (demo) { laadDemo(demo.dataset.demo); return; }
+    const inv = t.closest("[data-invdossier]"); if (inv) { laadUitInventaris(inv.dataset.invdossier); return; }
     const sj = t.closest("[data-sjabloon]"); if (sj) { A4.sjabloon = sj.dataset.sjabloon; try { localStorage.setItem("checklisttool:sjabloon", A4.sjabloon); } catch {} tekenA4(); return; }
     const rp = t.closest("[data-punt]"); if (rp) { const i = +rp.dataset.punt; if (UI.scherm !== "controle") { S.huidig = i; S.focus = null; toonScherm("controle"); } else gaNaar(i); sluitRail(); return; }
     const kies = t.closest("[data-kies]"); if (kies) { S.keuze = kies.dataset.kies; S.keuzeExpliciet = true; S.typeGenegeerd = false; tekenDossier(); return; }
